@@ -1,0 +1,79 @@
+.landing-container {
+    background: radial-gradient(circle, #d9ff00 0%, #000000 100%); // Modernija tamna nijansa
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    h1 {
+        color: rgba(255, 255, 255, 0.578);
+        font-size: 20px;
+        margin-bottom: 40px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .cars-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); // 3 stupca
+        gap: 25px;
+        max-width: 1000px;
+        width: 100%;
+    }
+
+    .car-card {
+        background-color: #252a3468; // Tamna pozadina kartice
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        transition: transform 0.2s;
+        border: 2px solid transparent;
+        cursor: pointer;
+
+        &.selected {
+            border: 2px solid #d9ff00;
+        }
+
+        &:hover {
+            transform: scale(1.03); // Lagani efekt pri hoveru
+        }
+
+        img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover; // Slika lijepo popunjava prostor
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    }
+
+    .next-btn {
+        margin-top: 50px;
+        background-color: #d9ff00; // Tvoja prepoznatljiva žuta
+        border: none;
+        padding: 15px 80px;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        text-transform: uppercase;
+
+        &:hover {
+            background-color: #d9ff00af;
+        }
+
+        &.disabled {
+            background-color: #555 !important;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    }
+}
