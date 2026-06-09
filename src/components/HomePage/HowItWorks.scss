@@ -1,0 +1,33 @@
+.howitworks-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #3333337b;
+  border-radius: 15px;
+  color: white;
+  font-size: 16px;
+  max-width: 700px;
+  margin: 40px auto;
+
+  h2 {
+    color: #d9ff00;
+    margin-bottom: 15px;
+    font-weight: 900;
+    text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.216);
+
+    .rev {
+      color: #e8e7e7;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .ai {
+      font-family: "Montserrat", sans-serif;
+    }
+  }
+
+  .step-title {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+}

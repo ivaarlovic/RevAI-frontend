@@ -1,0 +1,37 @@
+.category-section {
+  padding: 40px;
+
+  h2 {
+    color: #d9ff00;
+    margin-bottom: 30px;
+    font-weight: 900;
+    text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.216);
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+.category-card {
+  background: #3333337b;
+  border-radius: 15px;
+  padding: 15px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Ovo horizontalno centrira sliku i tekst
+  text-align: center;
+
+  .icon {
+    font-size: 100px;
+    color: #fff200b7;
+  }
+
+  h2 {
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.956);
+  }
+}
