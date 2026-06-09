@@ -1,0 +1,60 @@
+.recommended-section {
+  padding: 40px;
+
+  h2 {
+    color: #d9ff00;
+    margin-bottom: 30px;
+    font-weight: 900;
+    text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.216);
+  }
+
+  .cars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+.car-card {
+  background: #3333337b;
+  border-radius: 15px;
+  padding: 15px;
+  color: white; // Osigurava da je tekst bijel
+
+  p {
+    color: rgba(255, 255, 255, 0.811);
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    height: 150px; // Fiksna visina slike da budu iste
+    object-fit: cover; // Sprječava izobličenje slike
+    border-radius: 10px;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between; // Gumb lijevo, postotak desno
+    align-items: center;
+    margin-top: 15px;
+
+    .match-score {
+      background: #d9ff00;
+      color: black;
+      font-weight: 900;
+      padding: 10px;
+      border-radius: 50%; // Okrugli oblik
+    }
+
+    .details-btn {
+      background: #d9ff00;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}

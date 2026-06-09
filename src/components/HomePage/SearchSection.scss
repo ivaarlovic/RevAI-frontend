@@ -1,0 +1,62 @@
+.search-section {
+  display: flex;
+  gap: 20px;
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  .search-box,
+  .ai-status {
+    background-color: #3333337b;
+    border-radius: 15px;
+    padding: 30px;
+  }
+
+  .search-box {
+    flex: 2;
+    h2 {
+      color: #d9ff00;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    p {
+      color: rgba(255, 255, 255, 0.905);
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 20px 0;
+      background: #444;
+      border: none;
+      border-radius: 8px;
+      color: white;
+    }
+    .search-btn {
+      background: #d9ff00;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+
+  .ai-status {
+    flex: 1;
+    text-align: center;
+    color: #d9ff00;
+    .status-indicator {
+      color: #ffffffed;
+      font-size: 12px;
+
+      .tocka {
+        color: green;
+      }
+    }
+
+    .car-icon {
+      font-size: 120px;
+      color: #fff200b7;
+    }
+  }
+}
