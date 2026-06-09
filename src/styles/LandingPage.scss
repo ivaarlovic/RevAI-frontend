@@ -1,6 +1,4 @@
 .landing-container {
-    background: radial-gradient(circle, #d9ff00 0%, #000000 100%); // Modernija tamna nijansa
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +6,7 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 
     h1 {
-        color: rgba(255, 255, 255, 0.578);
+        color: rgba(255, 255, 255, 0.826);
         font-size: 20px;
         margin-bottom: 40px;
         text-align: center;
