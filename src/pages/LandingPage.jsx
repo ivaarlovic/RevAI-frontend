@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { carStore } from "../stores/CarStore";
 import "./../styles/LandingPage.scss";
 import { useNavigate } from "react-router-dom";
+import { IoCarSportOutline } from "react-icons/io5";
 
 const LandingPage = observer(() => {
   useEffect(() => {
@@ -10,6 +11,9 @@ const LandingPage = observer(() => {
   }, []);
 
   const navigate = useNavigate();
+
+  const selectedCount = carStore.selectedCars.length;
+
   const handleNext = () => {
     if (carStore.isSelectionComplete) {
       navigate("/home");
@@ -17,32 +21,60 @@ const LandingPage = observer(() => {
   };
 
   return (
-    <div className="landing-container">
-      <h1>
-        ODABERI 5 AUTOMOBILA KOJI TE ODUŠEVLJAVAJU I DOPUSTI DA TE UPOZNAMO!
-      </h1>
-      <div className="cars-grid">
-        {carStore.cars.map((car) => (
-          <div
-            key={car.id}
-            className={`car-card ${carStore.selectedCars.includes(car.id) ? "selected" : ""}`}
-            onClick={() => carStore.toggleSelection(car.id)}
-          >
-            <img src={car.imageUrl} alt={car.model} />
-            <p>
-              {car.brand} - {car.model}
-            </p>
+    <section className="landing-section">
+      <div className="landing-container">
+        <div className="header">
+          <h1>ODABERI 5 AUTOMOBILA KOJI TE ODUŠEVLJAVAJU</h1>
+          <p className="subtitle">
+            Dopusti da te upoznamo — naš AI će ti na temelju odabira predložiti
+            savršen auto
+          </p>
+
+          <div className="selection-info">
+            <span className="count">
+              {selectedCount} <span className="total">/ 5</span>
+            </span>
+            <span className="status">
+              {selectedCount === 5
+                ? "Spremno za nastavak!"
+                : "Odaberi još automobila"}
+            </span>
           </div>
-        ))}
+        </div>
+
+        <div className="cars-grid">
+          {carStore.cars.map((car) => (
+            <div
+              key={car.id}
+              className={`car-card ${carStore.selectedCars.includes(car.id) ? "selected" : ""}`}
+              onClick={() => carStore.toggleSelection(car.id)}
+            >
+              <div className="image-container">
+                <img src={car.imageUrl} alt={car.model} />
+                {carStore.selectedCars.includes(car.id) && (
+                  <div className="selected-overlay">
+                    <IoCarSportOutline />
+                  </div>
+                )}
+              </div>
+              <div className="car-info">
+                <h3>
+                  {car.brand} {car.model}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button
+          className={`next-btn ${!carStore.isSelectionComplete ? "disabled" : ""}`}
+          disabled={!carStore.isSelectionComplete}
+          onClick={handleNext}
+        >
+          NASTAVI
+        </button>
       </div>
-      <button
-        className={`next-btn ${!carStore.isSelectionComplete ? "disabled" : ""}`}
-        disabled={!carStore.isSelectionComplete}
-        onClick={() => handleNext()}
-      >
-        NASTAVI
-      </button>
-    </div>
+    </section>
   );
 });
 

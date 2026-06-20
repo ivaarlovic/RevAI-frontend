@@ -1,62 +1,174 @@
 .search-section {
+  min-height: 520px;
   display: flex;
-  gap: 20px;
-  padding: 40px;
-  max-width: 1000px;
-  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+}
 
-  .search-box,
-  .ai-status {
-    background-color: #3333337b;
-    border-radius: 15px;
-    padding: 30px;
+.search-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(0, 255, 200, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(100, 150, 255, 0.06) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  max-width: 1150px;
+  width: 100%;
+  z-index: 2;
+}
+
+.panel {
+  background: rgba(15, 15, 25, 0.95);
+  border: 1px solid rgba(0, 255, 200, 0.15);
+  border-radius: 24px;
+  padding: 48px 42px;
+  backdrop-filter: blur(16px);
+  transition: all 0.4s ease;
+}
+
+.search-box {
+  flex: 2.1;
+
+  h1 {
+    font-size: clamp(2.4rem, 5.5vw, 3.4rem);
+    line-height: 1.05;
+    font-weight: 900;
+    background: linear-gradient(90deg, #ffffff, #00ffcc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 18px;
   }
 
-  .search-box {
-    flex: 2;
-    h2 {
-      color: #d9ff00;
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-    p {
-      color: rgba(255, 255, 255, 0.905);
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 20px 0;
-      background: #444;
-      border: none;
-      border-radius: 8px;
-      color: white;
-    }
-    .search-btn {
-      background: #d9ff00;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
+  p {
+    color: #a0b0cc;
+    font-size: 1.15rem;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .input-wrapper {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  input {
+    width: 100%;
+    padding: 18px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 200, 0.3);
+    border-radius: 16px;
+    color: white;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+
+    &:focus {
+      outline: none;
+      border-color: #00ffcc;
+      box-shadow: 0 0 0 4px rgba(0, 255, 204, 0.15);
     }
   }
 
-  .ai-status {
-    flex: 1;
-    text-align: center;
-    color: #d9ff00;
-    .status-indicator {
-      color: #ffffffed;
-      font-size: 12px;
+  .search-btn {
+    background: linear-gradient(90deg, #00ffcc, #00b894);
+    color: #0a0a0a;
+    font-weight: 700;
+    font-size: 1.15rem;
+    padding: 18px 48px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 
-      .tocka {
-        color: green;
-      }
+    &:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(0, 255, 204, 0.35);
     }
+  }
+}
 
-    .car-icon {
-      font-size: 120px;
-      color: #fff200b7;
-    }
+.ai-status {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+
+  .car-icon {
+    font-size: 160px;
+    color: #00ffcc;
+    filter: drop-shadow(0 0 40px rgba(0, 255, 204, 0.7));
+    transition: all 0.6s ease;
+  }
+
+  .ai-status:hover .car-icon {
+    transform: scale(1.1) rotate(12deg);
+  }
+
+  p {
+    margin: 24px 0 16px;
+    color: #ccd6f6;
+    font-size: 1.2rem;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 255, 200, 0.1);
+    padding: 10px 22px;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 255, 200, 0.3);
+    font-weight: 600;
+    color: #00ffcc;
+  }
+
+  .tocka {
+    color: #00ff41;
+    animation: pulse 1.8s infinite;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Responsive */
+@media (max-width: 820px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .panel {
+    padding: 40px 30px;
   }
 }

@@ -1,34 +1,102 @@
-.contact-box {
-  padding: 20px;
-  max-width: 700px;
-  margin: 40px auto;
-  background: #3333337b;
-  border-radius: 15px;
+.contact-section {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+}
+
+.contact-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
 
   h2 {
-    color: #d9ff00;
-    margin-bottom: 15px;
+    font-size: clamp(2.3rem, 5vw, 3.3rem);
     font-weight: 900;
-    text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.216);
+    background: linear-gradient(90deg, #ffffff, #00ffcc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
   }
+
   p {
-    color: rgba(255, 255, 255, 0.905);
+    color: #a0b0cc;
+    font-size: 1.15rem;
+    max-width: 500px;
+    margin: 0 auto;
   }
-  input {
+}
+
+.contact-form {
+  background: rgba(15, 15, 25, 0.95);
+  border: 1px solid rgba(0, 255, 200, 0.15);
+  border-radius: 24px;
+  padding: 50px 45px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+
+  .input-group {
+    margin-bottom: 24px;
+  }
+
+  input,
+  textarea {
     width: 100%;
-    padding: 12px;
-    margin: 20px 0;
-    background: #444;
-    border: none;
-    border-radius: 8px;
+    padding: 18px 22px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(0, 255, 200, 0.25);
+    border-radius: 16px;
     color: white;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #00ffcc;
+      box-shadow: 0 0 0 4px rgba(0, 255, 204, 0.15);
+    }
   }
+
+  textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
   .send-btn {
-    background: #d9ff00;
+    width: 100%;
+    background: linear-gradient(90deg, #00ffcc, #00b894);
+    color: #0a0a0a;
     border: none;
-    padding: 12px 30px;
-    border-radius: 8px;
-    font-weight: bold;
+    padding: 18px 40px;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 1.15rem;
     cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all 0.4s ease;
+    margin-top: 10px;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0, 255, 204, 0.4);
+    }
+  }
+}
+
+/* Responsivnost */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 70px 15px;
+  }
+
+  .contact-form {
+    padding: 40px 25px;
   }
 }

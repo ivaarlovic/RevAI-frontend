@@ -1,16 +1,25 @@
 .app-container {
   min-height: 100vh;
-  background: radial-gradient(circle, #453400 0%, #000000ff 100%);
-  font-family: 'Nunito', sans-serif;
+  background: radial-gradient(circle, #006450bf 0%, black 100%);
+  color: #111827;
+  font-family: "Nunito", sans-serif;
 }
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Ovo je jako važno za precizno mjerenje širine elemenata */
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
+  background: #f4f1eb;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }

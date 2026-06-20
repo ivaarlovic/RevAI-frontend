@@ -1,60 +1,128 @@
 .recommended-section {
-  padding: 40px;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
 
   h2 {
-    color: #d9ff00;
-    margin-bottom: 30px;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
     font-weight: 900;
-    text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.216);
+    background: linear-gradient(90deg, #ffffff, #00ffcc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
   }
 
-  .cars-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+  p {
+    color: #a0b0cc;
+    font-size: 1.15rem;
   }
 }
 
-.car-card {
-  background: #3333337b;
-  border-radius: 15px;
-  padding: 15px;
-  color: white; // Osigurava da je tekst bijel
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
-  p {
-    color: rgba(255, 255, 255, 0.811);
+.car-card {
+  background: rgba(15, 15, 25, 0.95);
+  border: 1px solid rgba(0, 255, 200, 0.15);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(16px);
+
+  &:hover {
+    transform: translateY(-12px);
+    border-color: rgba(0, 255, 200, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 255, 204, 0.15);
   }
 
-  img {
-    display: block;
-    margin: 0 auto;
-    width: 80%;
-    height: 150px; // Fiksna visina slike da budu iste
-    object-fit: cover; // Sprječava izobličenje slike
-    border-radius: 10px;
+  .image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .car-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .match-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: linear-gradient(135deg, #00ffcc, #00b894);
+      color: #0a0a0a;
+      font-weight: 900;
+      font-size: 1.1rem;
+      padding: 8px 18px;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0, 255, 204, 0.4);
+    }
+  }
+
+  .card-content {
+    padding: 24px 24px 16px;
+
+    h3 {
+      color: white;
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    p {
+      color: #8899bb;
+      font-size: 1rem;
+    }
   }
 
   .card-footer {
-    display: flex;
-    justify-content: space-between; // Gumb lijevo, postotak desno
-    align-items: center;
-    margin-top: 15px;
-
-    .match-score {
-      background: #d9ff00;
-      color: black;
-      font-weight: 900;
-      padding: 10px;
-      border-radius: 50%; // Okrugli oblik
-    }
+    padding: 0 24px 24px;
 
     .details-btn {
-      background: #d9ff00;
+      width: 100%;
+      background: linear-gradient(90deg, #00ffcc, #00b894);
+      color: #0a0a0a;
       border: none;
-      padding: 12px 30px;
-      border-radius: 8px;
-      font-weight: bold;
+      padding: 16px 24px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 1.05rem;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.4s ease;
+
+      &:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 25px rgba(0, 255, 204, 0.35);
+      }
     }
+  }
+}
+
+/* Responsivnost */
+@media (max-width: 768px) {
+  .recommended-section {
+    padding: 70px 15px;
   }
 }

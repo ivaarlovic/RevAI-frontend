@@ -4,31 +4,43 @@ import "./HowItWorks.scss";
 const HowItWorks = () => {
   const steps = [
     {
-      title: "OPIŠI ŽELJE:",
-      text: "Unesi svoje preferencije stil vožnje ili budžet.",
+      number: "01",
+      title: "OPIŠI ŽELJE",
+      text: "Unesi svoje preferencije, stil vožnje ili budžet.",
     },
     {
-      title: "AI ANALIZA:",
+      number: "02",
+      title: "AI ANALIZA",
       text: "Naš algoritam pretražuje bazu i analizira tvoj stil.",
     },
     {
-      title: "SAVRŠEN IZBOR:",
+      number: "03",
+      title: "SAVRŠEN IZBOR",
       text: "Dobivaš personalizirane preporuke automobila.",
     },
   ];
+
   return (
-    <div className="howitworks-container">
-      <h2>
-        KAKO <span className="rev"> REV</span>
-        <span className="ai">AI </span> RADI?
-      </h2>
-      {steps.map((step, index) => (
-        <div key={index} className="step-card">
-          <span className="step-title">{step.title}</span>
-          <span className="step-text">{step.text}</span>
-        </div>
-      ))}
-    </div>
+    <section className="howitworks-section">
+      <div className="section-header">
+        <h2>
+          KAKO <span className="highlight">REVAI</span> RADI?
+        </h2>
+        <p>Tvoja vožnja. Naša inteligencija.</p>
+      </div>
+
+      <div className="steps-container">
+        {steps.map((step, index) => (
+          <div key={index} className="step-card">
+            <div className="step-number">{step.number}</div>
+            <div className="step-content">
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 
