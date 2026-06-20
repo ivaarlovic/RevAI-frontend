@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar/Navbar";
 import "./App.scss";
 import Footer from "./components/Footer/Footer";
+import GaragePage from "./pages/GaragePage";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/garage" element={<GaragePage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
         <Footer />
       </div>
