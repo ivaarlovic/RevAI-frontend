@@ -1,0 +1,153 @@
+.contact-page {
+  padding: 100px 20px 120px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  min-height: 100vh;
+}
+
+.contact-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 80px;
+
+  h1 {
+    font-size: clamp(2.6rem, 6vw, 3.8rem);
+    font-weight: 900;
+    background: linear-gradient(90deg, #ffffff, #00ffcc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+  }
+
+  p {
+    color: #a0b0cc;
+    font-size: 1.25rem;
+  }
+}
+
+.contact-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.contact-form-container {
+  .contact-form {
+    background: rgba(15, 15, 25, 0.95);
+    border: 1px solid rgba(0, 255, 200, 0.15);
+    border-radius: 24px;
+    padding: 50px 45px;
+    backdrop-filter: blur(16px);
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 24px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 18px 22px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(0, 255, 200, 0.25);
+      border-radius: 16px;
+      color: white;
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #00ffcc;
+        box-shadow: 0 0 0 4px rgba(0, 255, 204, 0.15);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 160px;
+    }
+
+    .send-btn {
+      width: 100%;
+      background: linear-gradient(90deg, #00ffcc, #00b894);
+      color: #0a0a0a;
+      border: none;
+      padding: 18px 40px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 10px;
+      transition: all 0.4s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(0, 255, 204, 0.4);
+      }
+    }
+  }
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .info-card {
+    background: rgba(15, 15, 25, 0.8);
+    border: 1px solid rgba(0, 255, 200, 0.15);
+    border-radius: 20px;
+    padding: 32px;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(12px);
+
+    &:hover {
+      border-color: #00ffcc;
+      transform: translateY(-6px);
+    }
+
+    .info-icon {
+      font-size: 2.8rem;
+      color: #00ffcc;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      color: white;
+      margin-bottom: 8px;
+      font-size: 1.4rem;
+    }
+
+    p {
+      color: #ccd6f6;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+/* Responsivnost */
+@media (max-width: 900px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-page {
+    padding: 70px 15px;
+  }
+}
