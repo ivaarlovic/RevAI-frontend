@@ -1,0 +1,254 @@
+.search-page {
+  padding: 70px 20px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #12121a 100%);
+  min-height: 100vh;
+}
+
+.search-page-header {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 50px;
+
+  h1 {
+    font-size: clamp(2.4rem, 5vw, 3.3rem);
+    font-weight: 900;
+    background: linear-gradient(90deg, #ffffff, #00ffcc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  p {
+    color: #a0b0cc;
+    font-size: 1.15rem;
+  }
+}
+
+.search-page-content {
+  display: grid;
+  grid-template-columns: 260px 1fr; /* uži sidebar */
+  gap: 30px;
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+/* ==================== FILTERI ==================== */
+.filters-sidebar {
+  background: rgba(15, 15, 25, 0.95);
+  border: 1px solid rgba(0, 255, 200, 0.18);
+  border-radius: 20px;
+  padding: 26px;
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+  backdrop-filter: blur(16px);
+}
+
+.filters-sidebar h3 {
+  color: #00ffcc;
+  margin-bottom: 22px;
+  font-size: 1.25rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 9px;
+  color: #ccd6f6;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Godina proizvodnje */
+.filter-group h4 {
+  color: white;
+  margin-bottom: 12px;
+}
+
+.year-range {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 15, 25, 0.8);
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 200, 0.25);
+}
+
+.year-range input {
+  width: 110px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 200, 0.35);
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.year-range span {
+  color: #00ffcc;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 0 4px;
+}
+
+.reset-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #ff3366;
+  color: #ff3366;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+/* ==================== REZULTATI ==================== */
+.results-area {
+  .search-bar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  input {
+    flex: 1;
+    min-width: 260px;
+    padding: 16px 20px;
+    background: rgba(15, 15, 25, 0.95);
+    border: 1px solid rgba(0, 255, 200, 0.25);
+    border-radius: 16px;
+    color: white;
+    font-size: 1.05rem;
+  }
+
+  select {
+    padding: 16px 20px;
+    background: rgba(15, 15, 25, 0.95);
+    border: 1px solid rgba(0, 255, 200, 0.25);
+    border-radius: 16px;
+    color: white;
+    min-width: 220px;
+  }
+}
+
+/* Godina Od - Do */
+.year-range {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: rgba(15, 15, 25, 0.95);
+  padding: 14px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 200, 0.25);
+
+  input {
+    padding: auto;
+    width: 70px;
+    background: transparent;
+    border: 1px solid rgba(0, 255, 200, 0.3);
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+  }
+
+  span {
+    color: #00ffcc;
+    font-weight: bold;
+  }
+}
+
+/* Reset button */
+.reset-btn {
+  background: transparent;
+  border: 1px solid #ff3366;
+  color: #ff3366;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    background: #ff3366;
+    color: white;
+  }
+}
+
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(270px, 1fr)
+  ); /* malo uže kartice */
+  gap: 22px;
+}
+
+.car-card {
+  background: rgba(15, 15, 25, 0.95);
+  border: 1px solid rgba(0, 255, 200, 0.15);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s;
+
+  &:hover {
+    transform: translateY(-10px);
+    border-color: #00ffcc;
+  }
+
+  .image-container {
+    height: 185px;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .match-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #00ffcc;
+    color: #0a0a0a;
+    font-weight: 900;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+  }
+
+  .card-content {
+    padding: 16px;
+    text-align: center;
+  }
+
+  .details-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #00ffcc, #00b894);
+    color: #0a0a0a;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 700;
+  }
+}
+
+/* Responsivnost */
+@media (max-width: 992px) {
+  .search-page-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-page {
+    padding: 50px 15px;
+  }
+}

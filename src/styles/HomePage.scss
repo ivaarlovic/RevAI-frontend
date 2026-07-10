@@ -1,0 +1,46 @@
+.home-container {
+  background: #0a0a0a;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* === GLOBALNI SECTION STILOVI === */
+section {
+  padding: 80px 20px;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 50px;
+
+  h2 {
+    font-size: clamp(2.1rem, 4.8vw, 2.9rem);
+    font-weight: 900;
+    background: linear-gradient(90deg, #fff, #00ffcc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: #a0b0cc;
+    font-size: 1.1rem;
+  }
+}
+
+/* Manji razmaci između sekcija */
+.recommended-section,
+.category-section,
+.howitworks-section,
+.contact-section {
+  padding: 90px 20px;
+}
+
+/* Još kompaktnije na mobitelu */
+@media (max-width: 768px) {
+  section {
+    padding: 60px 15px;
+  }
+}

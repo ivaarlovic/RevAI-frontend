@@ -1,55 +1,52 @@
 .recommended-section {
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-  position: relative;
-  overflow: hidden;
+  padding: 70px 20px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #12121a 100%);
 }
 
 .section-header {
   text-align: center;
-  max-width: 700px;
-  margin: 0 auto 60px;
+  margin-bottom: 50px;
 
   h2 {
-    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-size: clamp(2.3rem, 5vw, 3rem);
     font-weight: 900;
-    background: linear-gradient(90deg, #ffffff, #00ffcc);
+    background: linear-gradient(90deg, #00ffcc, #00aaff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   p {
-    color: #a0b0cc;
-    font-size: 1.15rem;
+    color: #b0b8cc;
+    font-size: 1.1rem;
   }
 }
 
 .cars-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  max-width: 1400px;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 22px;
+  max-width: 1350px;
   margin: 0 auto;
 }
 
 .car-card {
-  background: rgba(15, 15, 25, 0.95);
-  border: 1px solid rgba(0, 255, 200, 0.15);
-  border-radius: 24px;
+  background: #16161f;
+  border-radius: 22px;
   overflow: hidden;
+  border: 1px solid rgba(0, 255, 200, 0.1);
   transition: all 0.4s ease;
-  backdrop-filter: blur(16px);
+  position: relative;
 
   &:hover {
-    transform: translateY(-12px);
-    border-color: rgba(0, 255, 200, 0.4);
-    box-shadow: 0 20px 40px rgba(0, 255, 204, 0.15);
+    transform: translateY(-14px);
+    border-color: #00ffcc;
+    box-shadow: 0 0 30px rgba(0, 255, 204, 0.25);
   }
 
-  .image-container {
+  .image-wrapper {
     position: relative;
-    height: 200px;
+    height: 190px;
     overflow: hidden;
 
     img {
@@ -60,61 +57,59 @@
     }
 
     .car-card:hover img {
-      transform: scale(1.08);
+      transform: scale(1.1);
     }
 
-    .match-badge {
+    .match-overlay {
       position: absolute;
-      top: 16px;
-      right: 16px;
-      background: linear-gradient(135deg, #00ffcc, #00b894);
-      color: #0a0a0a;
+      top: 14px;
+      right: 14px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      padding: 5px 5px;
+      border-radius: 15px;
+      border: 1px solid #00ffcc;
+      color: #00ffcc;
       font-weight: 900;
-      font-size: 1.1rem;
-      padding: 8px 18px;
-      border-radius: 50px;
-      box-shadow: 0 4px 15px rgba(0, 255, 204, 0.4);
-    }
-  }
-
-  .card-content {
-    padding: 24px 24px 16px;
-
-    h3 {
-      color: white;
-      font-size: 1.35rem;
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-
-    p {
-      color: #8899bb;
       font-size: 1rem;
     }
   }
 
+  .card-body {
+    padding: 20px;
+    text-align: center;
+
+    h3 {
+      color: white;
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    p {
+      color: #8a9ab3;
+      font-size: 0.98rem;
+    }
+  }
+
   .card-footer {
-    padding: 0 24px 24px;
+    padding: 0 20px 22px;
 
     .details-btn {
       width: 100%;
-      background: linear-gradient(90deg, #00ffcc, #00b894);
+      background: linear-gradient(70deg, #00ffcc, #00b8ff);
       color: #0a0a0a;
       border: none;
-      padding: 16px 24px;
-      border-radius: 16px;
+      padding: 15px;
+      border-radius: 14px;
       font-weight: 700;
-      font-size: 1.05rem;
-      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
 
       &:hover {
-        transform: scale(1.03);
-        box-shadow: 0 10px 25px rgba(0, 255, 204, 0.35);
+        transform: scale(1.05);
       }
     }
   }
@@ -123,6 +118,6 @@
 /* Responsivnost */
 @media (max-width: 768px) {
   .recommended-section {
-    padding: 70px 15px;
+    padding: 60px 15px;
   }
 }
