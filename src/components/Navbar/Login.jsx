@@ -26,7 +26,7 @@ const Login = () => {
 
     const result = await userStore.login(formData.email, formData.password);
     if (result.success) {
-      navigate("/home");
+      navigate("/landing");
     } else {
       alert("Greška: " + result.error);
     }

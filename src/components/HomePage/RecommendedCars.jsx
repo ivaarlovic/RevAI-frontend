@@ -1,38 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./RecommendedCars.scss";
 import { IoCarSportOutline, IoFlashOutline } from "react-icons/io5";
 
 const RecommendedCars = () => {
-  const cars = [
-    {
-      id: 1,
-      name: "VOLKSWAGEN Golf Mk4",
-      subtitle: "Sport Pack • 2002",
-      image: "/preuzmi1.png",
-      match: 98,
-    },
-    {
-      id: 2,
-      name: "BMW M3 E46",
-      subtitle: "Coupe • 2003",
-      image: "/preuzmi1.png",
-      match: 95,
-    },
-    {
-      id: 3,
-      name: "AUDI RS4 B7",
-      subtitle: "Avant • 2006",
-      image: "/preuzmi1.png",
-      match: 93,
-    },
-    {
-      id: 4,
-      name: "PORSCHE 911 Carrera",
-      subtitle: "996 • 2003",
-      image: "/preuzmi1.png",
-      match: 91,
-    },
-  ];
+  const [cars, setCars] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/recommendations/" + userId)
+      .then((res) => res.json())
+      .then((data) => setCars(data));
+  }, [userId]);
 
   return (
     <section className="recommended-section">

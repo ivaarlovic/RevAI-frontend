@@ -24,11 +24,11 @@ function App() {
       <div className="app-container">
         <Navbar />
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/landing" element={<LandingPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/garage" element={<GaragePage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/recommendation" element={<RecommendationPage />} />
