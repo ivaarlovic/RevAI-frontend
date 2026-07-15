@@ -4,6 +4,8 @@ import { carStore } from "../stores/CarStore";
 import "./../styles/LandingPage.scss";
 import { useNavigate } from "react-router-dom";
 import { IoCarSportOutline } from "react-icons/io5";
+import { RevAIService } from "../services/RevAIService";
+import { userStore } from "../stores/UserStore";
 
 const LandingPage = observer(() => {
   useEffect(() => {
@@ -14,9 +16,20 @@ const LandingPage = observer(() => {
 
   const selectedCount = carStore.selectedCars.length;
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (carStore.isSelectionComplete) {
-      navigate("/home");
+      console.log("Userid", userStore.user);
+      try {
+        await RevAIService.savePreferences({
+          userId: userStore.user.userId,
+          carIds: carStore.selectedCars,
+        });
+
+        navigate("/home");
+      } catch (error) {
+        console.error("Greška pri spremanju preferencija:", error);
+        alert("Došlo je do greške spremanja odabira, pokušaj ponovno.");
+      }
     }
   };
 

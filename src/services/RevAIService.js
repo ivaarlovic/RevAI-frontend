@@ -18,4 +18,8 @@ export const RevAIService = {
       password: loginData.password,
     });
   },
+
+  savePreferences: async (data) => {
+    return await api.post("/Car/save-preferences", data);
+  },
 };

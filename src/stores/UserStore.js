@@ -12,6 +12,7 @@ class UserStore {
   async login(email, password) {
     try {
       const response = await RevAIService.login({ email, password });
+      console.log("Response data:", response.data);
       this.user = response.data;
       this.isAuthenticated = true;
       return { success: true };

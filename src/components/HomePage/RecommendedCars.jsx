@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./RecommendedCars.scss";
 import { IoCarSportOutline, IoFlashOutline } from "react-icons/io5";
+import { userStore } from "../../stores/UserStore";
 
 const RecommendedCars = () => {
   const [cars, setCars] = useState([]);
 
+  const userId = userStore.user?.userId;
+
   useEffect(() => {
-    fetch("http://localhost:8000/recommendations/" + userId)
-      .then((res) => res.json())
-      .then((data) => setCars(data));
+    console.log("Dohvaćam za userid:", userId);
+    if (userId) {
+      fetch(`http://localhost:8000/recommendations/${userId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Podacistigli", data);
+          setCars(data);
+        })
+        .catch((err) =>
+          console.error("Greska pri dohvaćanju preporuka: ", err),
+        );
+    }
   }, [userId]);
 
   return (
