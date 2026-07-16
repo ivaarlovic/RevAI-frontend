@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { observer } from "mobx-react-lite";
 import { carStore } from "../stores/CarStore";
 import "./../styles/LandingPage.scss";
@@ -13,6 +13,10 @@ const LandingPage = observer(() => {
   }, []);
 
   const navigate = useNavigate();
+
+  const randomCars = useMemo(() => {
+    return [...carStore.cars].sort(() => Math.random() - 0.5).slice(0, 25);
+  }, [carStore.cars]);
 
   const selectedCount = carStore.selectedCars.length;
 
@@ -56,7 +60,7 @@ const LandingPage = observer(() => {
         </div>
 
         <div className="cars-grid">
-          {carStore.cars.map((car) => (
+          {randomCars.map((car) => (
             <div
               key={car.id}
               className={`car-card ${carStore.selectedCars.includes(car.id) ? "selected" : ""}`}

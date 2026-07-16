@@ -154,3 +154,496 @@
     border-left: 4px solid #00e6a3; // Naglasak s lijeve strane
   }
 }
+
+.preference-form-container {
+  width: min(1200px, calc(100% - 40px));
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 36px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.form-step {
+  display: none;
+  width: 100%;
+  min-width: 0;
+
+  &.active {
+    display: block;
+  }
+}
+
+.cars-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.car-selection-item {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  background: #1a2538;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 255, 204, 0.45);
+  }
+
+  &.selected {
+    border-color: #00e8bd;
+    box-shadow: 0 0 0 3px rgba(0, 232, 189, 0.12);
+  }
+}
+
+.car-item-image {
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  background: #111827;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
+}
+
+.car-item-info {
+  padding: 14px 16px 18px;
+
+  h3 {
+    margin: 0 0 6px;
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    margin: 0 0 8px;
+    color: #a7b1c7;
+    font-size: 0.86rem;
+  }
+}
+
+.car-item-price {
+  color: #00e8bd;
+  font-weight: 700;
+}
+
+.selected-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 7px 11px;
+  border-radius: 20px;
+  background: #00e8bd;
+  color: #07120f;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.review-cars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.review-card {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.review-img {
+  display: block;
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+@media (max-width: 900px) {
+  .cars-selection-grid,
+  .review-cars-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .preference-form-container {
+    width: calc(100% - 24px);
+    margin: 20px auto;
+    padding: 22px 16px;
+  }
+
+  .cars-selection-grid,
+  .review-cars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .car-item-image {
+    height: 210px;
+  }
+}
+
+/* Završna personalizirana preporuka */
+.final-recommendation {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: 30px;
+  align-items: center;
+
+  width: 100%;
+  margin-top: 30px;
+  padding: 24px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.98),
+    rgba(20, 30, 48, 0.98)
+  );
+
+  border: 1px solid rgba(0, 230, 163, 0.35);
+  border-radius: 18px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.recommendation-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #111827;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.recommendation-match {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  min-width: 58px;
+  padding: 9px 12px;
+
+  background: #00e6a3;
+  color: #07120f;
+
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 230, 163, 0.3);
+}
+
+.recommendation-info {
+  min-width: 0;
+
+  .recommendation-label {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 7px 12px;
+
+    color: #00e6a3;
+    background: rgba(0, 230, 163, 0.1);
+    border: 1px solid rgba(0, 230, 163, 0.3);
+    border-radius: 20px;
+
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  h2 {
+    margin: 0 0 10px;
+    color: #ffffff;
+    font-size: 2rem;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  > p {
+    margin: 0 0 18px;
+    color: #a8b3c7;
+    font-size: 1rem;
+  }
+}
+
+.recommendation-details {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 13px;
+
+    border: 1px solid rgba(0, 230, 163, 0.45);
+    border-radius: 20px;
+
+    color: #00e6a3;
+    background: rgba(0, 230, 163, 0.07);
+
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+}
+
+.recommendation-error {
+  margin: 25px 0 0;
+  padding: 14px 18px;
+
+  color: #fecaca;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 10px;
+}
+
+/* Uređenje pregleda kriterija */
+.selected-filters-review {
+  margin-top: 25px;
+
+  h3 {
+    margin-bottom: 10px;
+  }
+}
+
+.review-box {
+  p {
+    margin: 5px 0;
+    line-height: 1.45;
+  }
+
+  strong {
+    color: #ffffff;
+  }
+}
+
+/* Gumbi završnog koraka */
+.form-step .step-actions {
+  width: 100%;
+
+  .submit-btn {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 800px) {
+  .final-recommendation {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .recommendation-image-wrapper {
+    height: 260px;
+  }
+
+  .recommendation-info {
+    text-align: center;
+
+    h2 {
+      font-size: 1.7rem;
+    }
+  }
+
+  .recommendation-details {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .final-recommendation {
+    padding: 15px;
+  }
+
+  .recommendation-image-wrapper {
+    height: 205px;
+  }
+
+  .recommendation-info h2 {
+    font-size: 1.45rem;
+  }
+
+  .form-step .step-actions {
+    flex-direction: column;
+
+    .back-btn,
+    .submit-btn {
+      width: 100%;
+    }
+  }
+}
+
+.preference-form-container {
+  .recommendation-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 30px;
+  }
+
+  .filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+
+    label {
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    select,
+    input {
+      width: 100%;
+      min-height: 52px;
+      padding: 13px 16px;
+
+      background: #1e293b;
+      color: #ffffff;
+
+      border: 1px solid #334155;
+      border-radius: 10px;
+
+      font-size: 0.95rem;
+      box-sizing: border-box;
+
+      transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+
+      &:hover {
+        border-color: rgba(0, 230, 163, 0.55);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #00e6a3;
+        background: #223047;
+        box-shadow: 0 0 0 4px rgba(0, 230, 163, 0.12);
+      }
+    }
+
+    select {
+      cursor: pointer;
+
+      option {
+        background: #1e293b;
+        color: #ffffff;
+      }
+    }
+
+    input {
+      &::placeholder {
+        color: #64748b;
+      }
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        appearance: none;
+        margin: 0;
+      }
+    }
+  }
+
+  .step-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    margin-top: 30px;
+
+    .back-btn,
+    .next-btn {
+      min-height: 48px;
+      padding: 12px 26px;
+      border-radius: 9px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+
+      transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .back-btn {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #334155;
+
+      &:hover {
+        color: #ffffff;
+        border-color: #64748b;
+        background: rgba(255, 255, 255, 0.04);
+        transform: translateY(-2px);
+      }
+    }
+
+    .next-btn {
+      flex: 1;
+      max-width: 430px;
+
+      background: linear-gradient(90deg, #00e6a3, #00c991);
+
+      color: #06110d;
+      border: none;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 9px 22px rgba(0, 230, 163, 0.2);
+      }
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .preference-form-container {
+    .recommendation-filters {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .step-actions {
+      flex-direction: column;
+      align-items: stretch;
+
+      .back-btn,
+      .next-btn {
+        width: 100%;
+        max-width: none;
+      }
+    }
+  }
+}
