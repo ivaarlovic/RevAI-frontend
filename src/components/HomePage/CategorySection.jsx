@@ -2,6 +2,7 @@ import { MdElectricBolt } from "react-icons/md";
 import { BsSpeedometer2 } from "react-icons/bs";
 import { PiCityLight } from "react-icons/pi";
 import { PiJeepLight } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 import "./CategorySection.scss";
 
 const categories = [
@@ -36,6 +37,7 @@ const categories = [
 ];
 
 const CategorySection = () => {
+  const navigate = useNavigate();
   return (
     <section className="category-section">
       <div className="section-header">
