@@ -8,6 +8,7 @@ class CarStore {
   lookingFor = "";
   recommendation = null;
   isLoading = false;
+  error = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -41,16 +42,31 @@ class CarStore {
     return this.selectedCars.length === 5;
   }
 
+  resetSelections() {
+    this.selectedCars = [];
+    this.likedCars = [];
+    this.lookingFor = "";
+    this.recommendation = null;
+  }
+
   async loadCars() {
     this.isLoading = true;
+    this.error = "";
     try {
       const response = await api.get("/Car");
+      const cars = Array.isArray(response.data)
+        ? response.data
+        : response.data?.cars || [];
 
       runInAction(() => {
-        this.cars = response.data;
+        this.cars = cars;
       });
     } catch (error) {
-      console.error("Greška pri dohvaćanju auta: ", error);
+      runInAction(() => {
+        this.error =
+          error.response?.data?.message ||
+          "Automobile trenutačno nije moguće učitati.";
+      });
     } finally {
       runInAction(() => {
         this.isLoading = false;
