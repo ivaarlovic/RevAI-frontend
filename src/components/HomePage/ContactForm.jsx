@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { sendContactMessage } from "../../services/contactService";
 import "./ContactForm.scss";
 
+const initialForm = { name: "", email: "", message: "" };
+
 const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState(initialForm);
+  const [status, setStatus] = useState({ type: "", message: "" });
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -15,11 +16,23 @@ const ContactForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Ovdje možeš dodati logiku slanja
-    console.log("Poslana poruka:", formData);
-    alert("Poruka je poslana! (Demo)");
+    setIsSending(true);
+    setStatus({ type: "", message: "" });
+
+    try {
+      await sendContactMessage({
+        ...formData,
+        subject: "Pitanje s RevAI početne stranice",
+      });
+      setFormData(initialForm);
+      setStatus({ type: "success", message: "Poruka je uspješno poslana." });
+    } catch (error) {
+      setStatus({ type: "error", message: error.message });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -64,8 +77,14 @@ const ContactForm = () => {
             />
           </div>
 
-          <button type="submit" className="send-btn">
-            POŠALJI PORUKU
+          {status.message && (
+            <p className={`form-status form-status--${status.type}`}>
+              {status.message}
+            </p>
+          )}
+
+          <button type="submit" className="send-btn" disabled={isSending}>
+            {isSending ? "SLANJE..." : "POŠALJI PORUKU"}
           </button>
         </form>
       </div>
