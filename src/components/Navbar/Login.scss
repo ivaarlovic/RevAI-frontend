@@ -158,3 +158,29 @@
     padding: 40px 25px;
   }
 }
+
+.auth-message {
+  margin: 12px 0;
+  padding: 11px 13px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 700;
+
+  &--error {
+    background: rgba(255, 79, 114, 0.12);
+    color: #ff7892;
+  }
+  &--success {
+    background: rgba(0, 255, 204, 0.12);
+    color: #00ffcc;
+  }
+}
+
+.forgot-password {
+  color: #718198;
+  cursor: not-allowed;
+}
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}

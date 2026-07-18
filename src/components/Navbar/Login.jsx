@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Login.scss";
 import { IoCarSportOutline } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { userStore } from "../../stores/UserStore";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     remember: false,
   });
+  const [error, setError] = useState("");
+  const registered = Boolean(location.state?.registered);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -23,12 +25,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const result = await userStore.login(formData.email, formData.password);
+    setError("");
+    const result = await userStore.login(
+      formData.email,
+      formData.password,
+      formData.remember,
+    );
     if (result.success) {
-      navigate("/landing");
+      navigate(location.state?.from || "/landing", { replace: true });
     } else {
-      alert("Greška: " + result.error);
+      setError(result.error);
     }
   };
 
@@ -73,18 +79,33 @@ const Login = () => {
                 />
                 Zapamti me
               </label>
-              <a href="#" className="forgot-password">
-                Zaboravio lozinku?
-              </a>
+              <span
+                className="forgot-password"
+                title="Reset lozinke nije povezan s backendom"
+              >
+                Zaboravljena lozinka?
+              </span>
             </div>
+            {registered && !error && (
+              <p className="auth-message auth-message--success">
+                Registracija je uspješna. Sada se možeš prijaviti.
+              </p>
+            )}
+            {error && (
+              <p className="auth-message auth-message--error">{error}</p>
+            )}
 
-            <button type="submit" className="login-button">
-              PRIJAVI SE
+            <button
+              type="submit"
+              className="login-button"
+              disabled={userStore.isLoading}
+            >
+              {userStore.isLoading ? "PRIJAVA..." : "PRIJAVI SE"}
             </button>
           </form>
 
           <div className="register-link">
-            Nemas račun? <Link to="/registration">Registriraj se</Link>
+            Nemaš račun? <Link to="/registration">Registriraj se</Link>
           </div>
         </div>
       </div>
