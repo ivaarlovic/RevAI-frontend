@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { IoCarSportOutline } from "react-icons/io5";
 import "./Footer.scss";
 
@@ -20,22 +20,22 @@ const Footer = () => {
           <div className="footer-links">
             <div className="links-column">
               <h4>Navigacija</h4>
-              <a href="/">Početna</a>
-              <a href="/garaza">Garaža</a>
-              <a href="/kategorije">Kategorije</a>
+              <Link to="/home">Početna</Link>
+              <Link to="/garage">Garaža</Link>
+              <Link to="/search">Pretraga</Link>
             </div>
 
             <div className="links-column">
-              <h4>Kompanija</h4>
-              <a href="/about">O nama</a>
-              <a href="/contact">Kontakt</a>
-              <a href="/blog">Blog</a>
+              <h4>RevAI</h4>
+              <Link to="/recommendation">Pronađi auto</Link>
+              <Link to="/about">O aplikaciji</Link>
+              <Link to="/contact">Kontakt</Link>
             </div>
 
             <div className="links-column">
               <h4>Pravno</h4>
-              <a href="/terms">Uvjeti korištenja</a>
-              <a href="/privacy">Politika privatnosti</a>
+              <Link to="/terms">Uvjeti korištenja</Link>
+              <Link to="/privacy">Politika privatnosti</Link>
             </div>
           </div>
         </div>
@@ -43,7 +43,8 @@ const Footer = () => {
         {/* Donji dio */}
         <div className="footer-bottom">
           <div className="footer-copyright">
-            © 2026 RevAI • Sva prava pridržana.
+            <span>© 2026 RevAI • Sva prava pridržana.</span>
+            <span>Izrađeno u sklopu diplomskog rada.</span>
           </div>
         </div>
       </div>
