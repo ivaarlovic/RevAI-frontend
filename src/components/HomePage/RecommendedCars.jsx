@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from "react";
-import "./RecommendedCars.scss";
-import { IoCarSportOutline } from "react-icons/io5";
+import { observer } from "mobx-react-lite";
+import { useEffect, useState } from "react";
+import { IoCarSportOutline, IoHeart, IoHeartOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import { garageStore } from "../../stores/GarageStore";
 import { userStore } from "../../stores/UserStore";
+import {
+  getCarId,
+  getCarImage,
+  getCarName,
+  getCarSubtitle,
+} from "../../utils/carUtils";
+import "./RecommendedCars.scss";
 
 const recommenderApiUrl =
   import.meta.env.VITE_RECOMMENDER_API_URL || "http://localhost:8000";
 
-const RecommendedCars = () => {
+const RecommendedCars = observer(() => {
+  const navigate = useNavigate();
   const [cars, setCars] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
   const userId = userStore.user?.userId;
 
   useEffect(() => {
@@ -36,11 +45,10 @@ const RecommendedCars = () => {
           throw new Error(data.detail || "Preporuke trenutno nisu dostupne.");
         }
 
-        setCars(data);
+        setCars(Array.isArray(data) ? data : data.cars || []);
       } catch (requestError) {
         if (requestError.name !== "AbortError") {
-          console.error("Greška pri dohvaćanju preporuka:", requestError);
-          setError(requestError.message);
+          setError(requestError.message || "Preporuke trenutno nisu dostupne.");
         }
       } finally {
         setIsLoading(false);
@@ -60,35 +68,59 @@ const RecommendedCars = () => {
 
       {isLoading && <p>Izračunavam personalizirane preporuke...</p>}
       {error && <p className="recommendation-error">{error}</p>}
+      {!isLoading && !error && cars.length === 0 && (
+        <p className="recommendation-status">
+          Još nema preporuka. Ponovno odaberi preferencije ili pokreni traženje
+          automobila.
+        </p>
+      )}
 
-      {!isLoading && !error && (
+      {!isLoading && !error && cars.length > 0 && (
         <div className="cars-grid">
-          {cars.map((car) => (
-            <div key={car.id} className="car-card">
-              <div className="image-wrapper">
-                <img src={car.image} alt={car.name} />
-                <div className="match-overlay">
-                  <span className="match-score">{car.match}%</span>
+          {cars.map((car) => {
+            const id = getCarId(car);
+            const isSaved = garageStore.has(id);
+
+            return (
+              <article key={id} className="car-card">
+                <div className="image-wrapper">
+                  <img src={getCarImage(car)} alt={getCarName(car)} />
+                  {car.match !== null && car.match !== undefined && (
+                    <div className="match-overlay">
+                      <span className="match-score">{car.match}%</span>
+                    </div>
+                  )}
+                  <button
+                    type="button"
+                    className={`recommended-heart ${isSaved ? "is-saved" : ""}`}
+                    onClick={() => garageStore.toggle(car)}
+                    aria-label={isSaved ? "Ukloni iz garaže" : "Dodaj u garažu"}
+                  >
+                    {isSaved ? <IoHeart /> : <IoHeartOutline />}
+                  </button>
                 </div>
-              </div>
 
-              <div className="card-body">
-                <h3>{car.name}</h3>
-                <p>{car.subtitle}</p>
-              </div>
+                <div className="card-body">
+                  <h3>{getCarName(car)}</h3>
+                  <p>{getCarSubtitle(car)}</p>
+                </div>
 
-              <div className="card-footer">
-                <button className="details-btn">
-                  DETALJI
-                  <IoCarSportOutline />
-                </button>
-              </div>
-            </div>
-          ))}
+                <div className="card-footer">
+                  <button
+                    type="button"
+                    className="details-btn"
+                    onClick={() => navigate(`/cars/${id}`)}
+                  >
+                    DETALJI <IoCarSportOutline />
+                  </button>
+                </div>
+              </article>
+            );
+          })}
         </div>
       )}
     </section>
   );
-};
+});
 
 export default RecommendedCars;
