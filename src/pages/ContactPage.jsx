@@ -1,36 +1,43 @@
-import React, { useState } from "react";
-import "./../styles/ContactPage.scss";
-import {
-  IoMailOutline,
-  IoCallOutline,
-  IoLocationOutline,
-} from "react-icons/io5";
+import { useState } from "react";
+import { IoMailOutline } from "react-icons/io5";
+import { contactEmail, sendContactMessage } from "../services/contactService";
+import "../styles/ContactPage.scss";
+
+const initialForm = { name: "", email: "", subject: "", message: "" };
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState(initialForm);
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState({ type: "", message: "" });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Kontakt poruka:", formData);
-    alert("Poruka uspješno poslana! (Demo mod)");
-    // Reset forme
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setIsSending(true);
+    setStatus({ type: "", message: "" });
+
+    try {
+      await sendContactMessage(formData);
+      setFormData(initialForm);
+      setStatus({
+        type: "success",
+        message: "Poruka je uspješno poslana. Hvala!",
+      });
+    } catch (error) {
+      setStatus({ type: "error", message: error.message });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
     <section className="contact-page">
       <div className="contact-header">
         <h1>KONTAKTIRAJ NAS</h1>
-        <p>Imamo pitanje? Tu smo za tebe.</p>
+        <p>Imaš pitanje, prijedlog ili problem? Pošalji poruku.</p>
       </div>
 
       <div className="contact-content">
@@ -82,8 +89,14 @@ const ContactPage = () => {
               />
             </div>
 
-            <button type="submit" className="send-btn">
-              POŠALJI PORUKU
+            {status.message && (
+              <p className={`contact-status contact-status--${status.type}`}>
+                {status.message}
+              </p>
+            )}
+
+            <button type="submit" className="send-btn" disabled={isSending}>
+              {isSending ? "SLANJE..." : "POŠALJI PORUKU"}
             </button>
           </form>
         </div>
@@ -93,24 +106,26 @@ const ContactPage = () => {
           <div className="info-card">
             <IoMailOutline className="info-icon" />
             <h3>Email</h3>
-            <p>info@revai.hr</p>
+            <p>
+              {contactEmail ||
+                "Email će se prikazati nakon podešavanja .env datoteke."}
+            </p>
           </div>
 
           <div className="info-card">
-            <IoCallOutline className="info-icon" />
-            <h3>Telefon</h3>
-            <p>+385 91 234 5678</p>
+            <h2>Kako šaljemo poruke?</h2>
+            <p>
+              Kontakt forma poruku šalje izravno na email postavljen u
+              konfiguraciji projekta.
+            </p>
           </div>
 
           <div className="info-card">
-            <IoLocationOutline className="info-icon" />
-            <h3>Adresa</h3>
-            <p>Zagreb, Hrvatska</p>
-          </div>
-
-          <div className="info-card">
-            <h3>Radno vrijeme</h3>
-            <p>Pon - Pet: 09:00 - 17:00</p>
+            <h2>Napomena</h2>
+            <p>
+              Pri prvom testnom slanju potrebno je potvrditi aktivaciju forme u
+              primljenom emailu.
+            </p>
           </div>
         </div>
       </div>

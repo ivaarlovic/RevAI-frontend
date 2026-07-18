@@ -1,92 +1,85 @@
-import React from "react";
-import "./../styles/GaragePage.scss";
+import { observer } from "mobx-react-lite";
 import { IoCarSportOutline, IoTrashOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { garageStore } from "../stores/GarageStore";
+import {
+  formatPrice,
+  getCarId,
+  getCarImage,
+  getCarName,
+  getCarPrice,
+  getCarSubtitle,
+} from "../utils/carUtils";
+import "../styles/GaragePage.scss";
 
-const GaragePage = () => {
+const GaragePage = observer(() => {
   const navigate = useNavigate();
 
-  const favoriteCars = [
-    {
-      id: 1,
-      name: "VOLKSWAGEN Golf Mk4",
-      subtitle: "Sport Pack • 2002 • 2.0 GTI",
-      image: "/preuzmi1.png",
-      match: 98,
-    },
-    {
-      id: 2,
-      name: "BMW M3 E46",
-      subtitle: "Coupe • 2003 • 3.2L",
-      image: "/preuzmi1.png",
-      match: 95,
-    },
-    {
-      id: 3,
-      name: "AUDI RS4 B7",
-      subtitle: "Avant • 2006 • 4.2 V8",
-      image: "/preuzmi1.png",
-      match: 93,
-    },
-    {
-      id: 4,
-      name: "PORSCHE 911 Carrera",
-      subtitle: "996 • 2003",
-      image: "/preuzmi1.png",
-      match: 89,
-    },
-  ];
-
-  const removeFromGarage = (id) => {
-    // Za sada samo alert - kasnije možeš dodati state/logiku
-    alert(`Uklonjen auto sa ID: ${id}`);
-    // TODO: Dodaj logiku za uklanjanje iz favorites
-  };
-
   return (
-    <section className="garage-section">
-      <div className="garage-header">
+    <main className="garage-page">
+      <header className="garage-page__header">
         <div>
           <h1>MOJA GARAŽA</h1>
-          <p>{favoriteCars.length} omiljenih automobila</p>
+          <p>{garageStore.cars.length} spremljenih automobila</p>
         </div>
-
-        <button className="find-more-btn" onClick={() => navigate("/")}>
+        <button type="button" onClick={() => navigate("/search")}>
           PRONAĐI JOŠ AUTOMOBILA
         </button>
-      </div>
+      </header>
 
-      <div className="cars-grid">
-        {favoriteCars.map((car) => (
-          <div key={car.id} className="car-card">
-            <div className="image-container">
-              <img src={car.image} alt={car.name} />
-              <button
-                className="remove-btn"
-                onClick={() => removeFromGarage(car.id)}
-                title="Ukloni iz garaže"
-              >
-                <IoTrashOutline />
-              </button>
-              <div className="match-badge">{car.match}%</div>
-            </div>
+      {garageStore.cars.length === 0 ? (
+        <section className="garage-empty">
+          <IoCarSportOutline />
+          <h2>Tvoja garaža je prazna</h2>
+          <p>
+            Spremi automobile iz pretrage ili preporuka kako bi ih kasnije lakše
+            usporedila.
+          </p>
+          <button type="button" onClick={() => navigate("/search")}>
+            Otvori pretragu
+          </button>
+        </section>
+      ) : (
+        <section className="garage-grid">
+          {garageStore.cars.map((car) => {
+            const id = getCarId(car);
+            return (
+              <article key={id} className="garage-card">
+                <div className="garage-card__image">
+                  <img src={getCarImage(car)} alt={getCarName(car)} />
+                  <button
+                    type="button"
+                    className="garage-card__remove"
+                    onClick={() => garageStore.remove(id)}
+                    title="Ukloni iz garaže"
+                  >
+                    <IoTrashOutline />
+                  </button>
+                  {car.match !== null && car.match !== undefined && (
+                    <span className="garage-card__match">{car.match}%</span>
+                  )}
+                </div>
 
-            <div className="card-content">
-              <h3>{car.name}</h3>
-              <p>{car.subtitle}</p>
-            </div>
+                <div className="garage-card__body">
+                  <h2>{getCarName(car)}</h2>
+                  <p>{getCarSubtitle(car)}</p>
+                  <strong>{formatPrice(getCarPrice(car))}</strong>
+                </div>
 
-            <div className="card-footer">
-              <button className="details-btn">
-                DETALJI
-                <IoCarSportOutline />
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+                <button
+                  type="button"
+                  className="garage-card__details"
+                  onClick={() => navigate(`/cars/${id}`)}
+                >
+                  DETALJI <IoCarSportOutline />
+                </button>
+              </article>
+            );
+          })}
+        </section>
+      )}
+    </main>
   );
-};
+});
 
 export default GaragePage;

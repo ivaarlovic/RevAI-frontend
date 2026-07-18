@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { observer } from "mobx-react-lite";
 
 import { carStore } from "../stores/CarStore";
 import { userStore } from "../stores/UserStore";
+import { garageStore } from "../stores/GarageStore";
 
 import "./../styles/RecommendationPage.scss";
 
@@ -58,6 +59,7 @@ const formatPrice = (price) => {
 };
 
 const RecommendationPage = observer(() => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
 
   const [brand, setBrand] = useState("");
@@ -102,6 +104,11 @@ const RecommendationPage = observer(() => {
   const isStep2Complete = Boolean(
     brand || fuelType || bodyType || maxPrice || minYear,
   );
+
+  const recommendationId = recommendation?.id ?? recommendation?.carId;
+  const recommendationSaved = recommendation
+    ? garageStore.has(recommendationId)
+    : false;
 
   const handleToggleCar = (carId) => {
     const isAlreadySelected = carStore.likedCars.includes(carId);
@@ -165,8 +172,6 @@ const RecommendationPage = observer(() => {
 
       setRecommendation(data.car);
     } catch (requestError) {
-      console.error("Greška pri dohvaćanju preporuke:", requestError);
-
       setError(requestError.message);
     } finally {
       setIsLoading(false);
@@ -463,6 +468,22 @@ const RecommendationPage = observer(() => {
                 {recommendation.horsePower > 0 && (
                   <span>{Math.round(recommendation.horsePower)} KS</span>
                 )}
+              </div>
+
+              <div className="recommendation-result-actions">
+                <button
+                  type="button"
+                  onClick={() => navigate(`/cars/${recommendationId}`)}
+                >
+                  DETALJI
+                </button>
+                <button
+                  type="button"
+                  onClick={() => garageStore.toggle(recommendation)}
+                >
+                  {recommendationSaved ? <IoHeart /> : <IoHeartOutline />}
+                  {recommendationSaved ? "U GARAŽI" : "SPREMI U GARAŽU"}
+                </button>
               </div>
             </div>
           </div>

@@ -1,6 +1,4 @@
-import React from "react";
 import "./../styles/HomePage.scss";
-import Navbar from "../components/Navbar/Navbar";
 import SearchSection from "../components/HomePage/SearchSection";
 import RecommendedCars from "../components/HomePage/RecommendedCars";
 import CategorySection from "../components/HomePage/CategorySection";

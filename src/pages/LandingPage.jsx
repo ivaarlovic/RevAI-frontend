@@ -8,11 +8,12 @@ import { RevAIService } from "../services/RevAIService";
 import { userStore } from "../stores/UserStore";
 
 const LandingPage = observer(() => {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
   useEffect(() => {
     carStore.loadCars();
   }, []);
-
-  const navigate = useNavigate();
 
   const randomCars = useMemo(() => {
     return [...carStore.cars].sort(() => Math.random() - 0.5).slice(0, 25);
@@ -21,19 +22,24 @@ const LandingPage = observer(() => {
   const selectedCount = carStore.selectedCars.length;
 
   const handleNext = async () => {
-    if (carStore.isSelectionComplete) {
-      console.log("Userid", userStore.user);
-      try {
-        await RevAIService.savePreferences({
-          userId: userStore.user.userId,
-          carIds: carStore.selectedCars,
-        });
+    if (!carStore.isSelectionComplete || !userStore.user?.userId) return;
 
-        navigate("/home");
-      } catch (error) {
-        console.error("Greška pri spremanju preferencija:", error);
-        alert("Došlo je do greške spremanja odabira, pokušaj ponovno.");
-      }
+    setIsSaving(true);
+    setError("");
+
+    try {
+      await RevAIService.savePreferences({
+        userId: userStore.user.userId,
+        carIds: [...carStore.selectedCars],
+      });
+      navigate("/home");
+    } catch (requestError) {
+      setError(
+        requestError.response?.data?.message ||
+          "Došlo je do greške pri spremanju odabira. Pokušaj ponovno.",
+      );
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -54,41 +60,56 @@ const LandingPage = observer(() => {
             <span className="status">
               {selectedCount === 5
                 ? "Spremno za nastavak!"
-                : "Odaberi još automobila"}
+                : `Odaberi još ${5 - selectedCount} automobila`}
             </span>
           </div>
         </div>
 
+        {carStore.isLoading && (
+          <p className="landing-message">Učitavanje automobila...</p>
+        )}
+        {carStore.error && (
+          <p className="landing-message landing-message--error">
+            {carStore.error}
+          </p>
+        )}
+
         <div className="cars-grid">
-          {randomCars.map((car) => (
-            <div
-              key={car.id}
-              className={`car-card ${carStore.selectedCars.includes(car.id) ? "selected" : ""}`}
-              onClick={() => carStore.toggleSelection(car.id)}
-            >
-              <div className="image-container">
-                <img src={car.imageUrl} alt={car.model} />
-                {carStore.selectedCars.includes(car.id) && (
-                  <div className="selected-overlay">
-                    <IoCarSportOutline />
-                  </div>
-                )}
-              </div>
-              <div className="car-info">
-                <h3>
-                  {car.brand} {car.model}
-                </h3>
-              </div>
-            </div>
-          ))}
+          {randomCars.map((car) => {
+            const id = getCarId(car);
+            const selected = carStore.selectedCars.includes(id);
+            return (
+              <button
+                key={id}
+                type="button"
+                className={`car-card ${selected ? "selected" : ""}`}
+                onClick={() => carStore.toggleSelection(id)}
+              >
+                <div className="image-container">
+                  <img src={getCarImage(car)} alt={getCarName(car)} />
+                  {selected && (
+                    <div className="selected-overlay">
+                      <IoCarSportOutline />
+                    </div>
+                  )}
+                </div>
+                <div className="car-info">
+                  <h3>{getCarName(car)}</h3>
+                </div>
+              </button>
+            );
+          })}
         </div>
 
+        {error && (
+          <p className="landing-message landing-message--error">{error}</p>
+        )}
         <button
           className={`next-btn ${!carStore.isSelectionComplete ? "disabled" : ""}`}
-          disabled={!carStore.isSelectionComplete}
+          disabled={!carStore.isSelectionComplete || isSaving}
           onClick={handleNext}
         >
-          NASTAVI
+          {isSaving ? "SPREMANJE..." : "NASTAVI"}
         </button>
       </div>
     </section>
