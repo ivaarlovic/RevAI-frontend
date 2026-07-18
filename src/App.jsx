@@ -124,7 +124,7 @@ const App = observer(() => {
           <Route path="/about" element={<InfoPage page="about" />} />
           <Route path="/terms" element={<InfoPage page="terms" />} />
           <Route path="/privacy" element={<InfoPage page="privacy" />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/error" element={<NotFoundPage />} />
         </Routes>
         <Footer />
       </div>
