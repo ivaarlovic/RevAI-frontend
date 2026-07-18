@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import "./Registration.scss";
+import { observer } from "mobx-react-lite";
+import { useState } from "react";
 import { IoCarSportOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { userStore } from "../../stores/UserStore";
-import { observer } from "mobx-react-lite";
+import "./Registration.scss";
 
 const Registration = observer(() => {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,6 +14,7 @@ const Registration = observer(() => {
     confirmPassword: "",
     terms: false,
   });
+  const [message, setMessage] = useState({ type: "", text: "" });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -26,23 +26,34 @@ const Registration = observer(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage({ type: "", text: "" });
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Lozinke se ne podudaraju!");
+      setMessage({ type: "error", text: "Lozinke se ne podudaraju." });
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setMessage({
+        type: "error",
+        text: "Lozinka mora imati najmanje 6 znakova.",
+      });
       return;
     }
 
     if (!formData.terms) {
-      alert("Morate prihvatiti uvjete korištenja.");
+      setMessage({
+        type: "error",
+        text: "Potrebno je prihvatiti uvjete korištenja.",
+      });
       return;
     }
 
     const result = await userStore.register(formData);
     if (result.success) {
-      alert("Registracija uspješna! ");
-      navigate("/login");
+      navigate("/login", { replace: true, state: { registered: true } });
     } else {
-      alert("Greška: " + result.error);
+      setMessage({ type: "error", text: result.error });
     }
   };
 
@@ -105,12 +116,22 @@ const Registration = observer(() => {
                 onChange={handleChange}
                 required
               />
-              Prihvaćam <Link to="/terms"> uvjete korištenja </Link> i politiku
-              privatnosti
+              Prihvaćam <Link to="/terms"> uvjete korištenja </Link> i i{" "}
+              <Link to="/privacy">politiku privatnosti</Link>
             </label>
 
-            <button type="submit" className="register-btn">
-              REGISTRIRAJ SE
+            {message.text && (
+              <p className={`auth-message auth-message--${message.type}`}>
+                {message.text}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="register-btn"
+              disabled={userStore.isLoading}
+            >
+              {userStore.isLoading ? "REGISTRACIJA..." : "REGISTRIRAJ SE"}
             </button>
           </form>
         </div>
