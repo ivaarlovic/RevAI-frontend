@@ -1,0 +1,120 @@
+.profile-page {
+  min-height: 100vh;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #08080d, #111827);
+  color: #fff;
+}
+
+.profile-card,
+.profile-stats,
+.profile-actions {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+  border: 1px solid rgba(0, 255, 204, 0.2);
+  background: rgba(15, 15, 25, 0.94);
+  border-radius: 24px;
+
+  &__avatar {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 255, 204, 0.12);
+    color: #00ffcc;
+    font-size: 46px;
+  }
+  &__eyebrow {
+    color: #00ffcc;
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 5px 0;
+  }
+  &__email {
+    color: #9fb0c8;
+  }
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+
+  article {
+    padding: 28px;
+    text-align: center;
+    border-radius: 20px;
+    background: rgba(15, 15, 25, 0.94);
+    border: 1px solid rgba(0, 255, 204, 0.14);
+  }
+  strong {
+    display: block;
+    color: #00ffcc;
+    font-size: 2.4rem;
+  }
+  span {
+    color: #a0b0cc;
+  }
+}
+
+.profile-actions {
+  margin-top: 24px;
+  padding: 26px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: rgba(15, 15, 25, 0.94);
+  border: 1px solid rgba(0, 255, 204, 0.14);
+  border-radius: 20px;
+
+  h2 {
+    margin-bottom: 6px;
+  }
+  p {
+    color: #9fb0c8;
+  }
+  button {
+    border: 0;
+    border-radius: 13px;
+    padding: 13px 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    background: #00ffcc;
+    color: #07100e;
+    white-space: nowrap;
+  }
+  &--danger button {
+    background: #ff4f72;
+    color: #fff;
+  }
+}
+
+@media (max-width: 700px) {
+  .profile-stats {
+    grid-template-columns: 1fr;
+  }
+  .profile-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .profile-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
