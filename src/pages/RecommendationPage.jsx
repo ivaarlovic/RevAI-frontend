@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { carStore } from "../stores/CarStore";
 import { userStore } from "../stores/UserStore";
 import { garageStore } from "../stores/GarageStore";
-
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import "./../styles/RecommendationPage.scss";
 
 const recommenderApiUrl =
