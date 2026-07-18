@@ -1,11 +1,12 @@
-import React, { useEffect, useMemo } from "react";
 import { observer } from "mobx-react-lite";
-import { carStore } from "../stores/CarStore";
-import "./../styles/LandingPage.scss";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useMemo } from "react";
 import { IoCarSportOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 import { RevAIService } from "../services/RevAIService";
+import { carStore } from "../stores/CarStore";
 import { userStore } from "../stores/UserStore";
+import { getCarId, getCarImage, getCarName } from "../utils/carUtils";
+import "../styles/LandingPage.scss";
 
 const LandingPage = observer(() => {
   const navigate = useNavigate();

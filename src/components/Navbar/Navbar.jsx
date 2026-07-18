@@ -11,7 +11,7 @@ import "./Navbar.scss";
 
 const Navbar = observer(() => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const navigate = useNavigate();
 
   const closeMenus = () => {
