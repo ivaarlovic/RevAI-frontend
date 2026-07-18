@@ -647,3 +647,28 @@
     }
   }
 }
+
+.recommendation-result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+
+  button {
+    border: 1px solid #00ffcc;
+    border-radius: 12px;
+    padding: 12px 18px;
+    background: #00ffcc;
+    color: #07100e;
+    font-weight: 900;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  button:last-child {
+    background: transparent;
+    color: #00ffcc;
+  }
+}

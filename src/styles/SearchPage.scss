@@ -1,254 +1,314 @@
 .search-page {
-  padding: 70px 20px;
-  background: linear-gradient(135deg, #0a0a0a 0%, #12121a 100%);
   min-height: 100vh;
+  padding: 70px 20px 90px;
+  background: linear-gradient(135deg, #08080d 0%, #111827 100%);
+  color: #fff;
+
+  &__header {
+    max-width: 900px;
+    margin: 0 auto 42px;
+    text-align: center;
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 3.5rem);
+      background: linear-gradient(90deg, #fff, #00ffcc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p {
+      margin-top: 10px;
+      color: #9fb0c8;
+      font-size: 1.1rem;
+    }
+  }
 }
 
-.search-page-header {
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto 50px;
-
-  h1 {
-    font-size: clamp(2.4rem, 5vw, 3.3rem);
-    font-weight: 900;
-    background: linear-gradient(90deg, #ffffff, #00ffcc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  p {
-    color: #a0b0cc;
-    font-size: 1.15rem;
-  }
-}
-
-.search-page-content {
-  display: grid;
-  grid-template-columns: 260px 1fr; /* uži sidebar */
-  gap: 30px;
+.search-layout {
   max-width: 1450px;
-  margin: 0 auto;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 285px minmax(0, 1fr);
+  gap: 28px;
 }
 
-/* ==================== FILTERI ==================== */
-.filters-sidebar {
-  background: rgba(15, 15, 25, 0.95);
-  border: 1px solid rgba(0, 255, 200, 0.18);
-  border-radius: 20px;
-  padding: 26px;
-  height: fit-content;
+.search-filters {
   position: sticky;
-  top: 90px;
-  backdrop-filter: blur(16px);
+  top: 98px;
+  align-self: start;
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 255, 204, 0.18);
+  background: rgba(15, 15, 25, 0.96);
+
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  h2 {
+    color: #00ffcc;
+  }
+  &__heading button {
+    border: 0;
+    background: none;
+    color: #ff6b7f;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  label {
+    display: grid;
+    gap: 7px;
+    color: #d7e0ef;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  select,
+  input {
+    width: 100%;
+    padding: 11px 12px;
+    border-radius: 11px;
+    border: 1px solid rgba(0, 255, 204, 0.24);
+    color: #fff;
+    background: #151720;
+    outline: none;
+  }
+  fieldset {
+    border: 0;
+    margin-top: 16px;
+  }
+  legend {
+    color: #d7e0ef;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
 }
 
-.filters-sidebar h3 {
-  color: #00ffcc;
-  margin-bottom: 22px;
-  font-size: 1.25rem;
+.range-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
 }
 
-.checkbox-label {
+.search-results {
+  min-width: 0;
+}
+.search-toolbar {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+  > select {
+    min-width: 235px;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 255, 204, 0.24);
+    background: #11141d;
+    color: #fff;
+  }
+}
+.search-input {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 9px;
-  color: #ccd6f6;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-/* Godina proizvodnje */
-.filter-group h4 {
-  color: white;
-  margin-bottom: 12px;
-}
-
-.year-range {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(15, 15, 25, 0.8);
-  padding: 12px 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 255, 200, 0.25);
-}
-
-.year-range input {
-  width: 110px;
-  padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 255, 200, 0.35);
-  border-radius: 12px;
-  color: white;
-  text-align: center;
-  font-size: 1rem;
-}
-
-.year-range span {
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 255, 204, 0.24);
+  background: #11141d;
   color: #00ffcc;
-  font-size: 1.3rem;
-  font-weight: bold;
-  padding: 0 4px;
-}
-
-.reset-btn {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  background: transparent;
-  border: 1px solid #ff3366;
-  color: #ff3366;
-  border-radius: 12px;
-  font-weight: 600;
-}
-
-/* ==================== REZULTATI ==================== */
-.results-area {
-  .search-bar {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
   input {
     flex: 1;
-    min-width: 260px;
-    padding: 16px 20px;
-    background: rgba(15, 15, 25, 0.95);
-    border: 1px solid rgba(0, 255, 200, 0.25);
-    border-radius: 16px;
-    color: white;
-    font-size: 1.05rem;
-  }
-
-  select {
-    padding: 16px 20px;
-    background: rgba(15, 15, 25, 0.95);
-    border: 1px solid rgba(0, 255, 200, 0.25);
-    border-radius: 16px;
-    color: white;
-    min-width: 220px;
-  }
-}
-
-/* Godina Od - Do */
-.year-range {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  background: rgba(15, 15, 25, 0.95);
-  padding: 14px 18px;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 255, 200, 0.25);
-
-  input {
-    padding: auto;
-    width: 70px;
+    min-width: 0;
+    padding: 14px 0;
+    border: 0;
+    outline: 0;
     background: transparent;
-    border: 1px solid rgba(0, 255, 200, 0.3);
-    border-radius: 10px;
-    color: white;
-    text-align: center;
-  }
-
-  span {
-    color: #00ffcc;
-    font-weight: bold;
+    color: #fff;
   }
 }
 
-/* Reset button */
-.reset-btn {
-  background: transparent;
-  border: 1px solid #ff3366;
-  color: #ff3366;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-
-  &:hover {
-    background: #ff3366;
-    color: white;
-  }
+.results-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #9fb0c8;
+  margin-bottom: 20px;
 }
-
-.cars-grid {
+.search-cars-grid {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(270px, 1fr)
-  ); /* malo uže kartice */
-  gap: 22px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
 }
 
-.car-card {
-  background: rgba(15, 15, 25, 0.95);
-  border: 1px solid rgba(0, 255, 200, 0.15);
-  border-radius: 20px;
+.search-car-card {
   overflow: hidden;
-  transition: all 0.4s;
-
+  border-radius: 20px;
+  border: 1px solid rgba(0, 255, 204, 0.14);
+  background: rgba(15, 15, 25, 0.96);
+  transition: 0.25s ease;
   &:hover {
-    transform: translateY(-10px);
-    border-color: #00ffcc;
+    transform: translateY(-5px);
+    border-color: rgba(0, 255, 204, 0.65);
   }
-
-  .image-container {
-    height: 185px;
-    overflow: hidden;
+  &__image {
+    height: 190px;
     position: relative;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    overflow: hidden;
+    background: #090a0f;
   }
-
-  .match-badge {
+  &__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &__match {
     position: absolute;
     top: 12px;
-    right: 12px;
+    left: 12px;
+    padding: 5px 11px;
+    border-radius: 999px;
     background: #00ffcc;
-    color: #0a0a0a;
+    color: #06100d;
     font-weight: 900;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.95rem;
   }
-
-  .card-content {
-    padding: 16px;
-    text-align: center;
+  &__heart {
+    position: absolute;
+    top: 11px;
+    right: 11px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(5, 7, 11, 0.82);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    &.is-saved {
+      color: #ff4f72;
+    }
   }
-
-  .details-btn {
+  &__body {
+    padding: 18px;
+    min-height: 142px;
+  }
+  &__body h3 {
+    font-size: 1.15rem;
+    margin-bottom: 7px;
+  }
+  &__body p {
+    color: #8fa0b8;
+    min-height: 42px;
+  }
+  &__body strong {
+    display: block;
+    margin-top: 12px;
+    color: #00ffcc;
+  }
+  &__details {
     width: 100%;
+    padding: 13px;
+    border: 0;
     background: linear-gradient(90deg, #00ffcc, #00b894);
-    color: #0a0a0a;
-    border: none;
-    padding: 14px;
-    border-radius: 12px;
-    font-weight: 700;
+    color: #06100d;
+    font-weight: 900;
+    cursor: pointer;
   }
 }
 
-/* Responsivnost */
-@media (max-width: 992px) {
-  .search-page-content {
+.search-empty,
+.search-state {
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px dashed rgba(0, 255, 204, 0.25);
+  border-radius: 20px;
+  color: #9fb0c8;
+}
+.search-empty svg {
+  font-size: 54px;
+  color: #00ffcc;
+}
+.search-empty h2 {
+  color: #fff;
+  margin: 12px 0 6px;
+}
+.search-empty button {
+  margin-top: 18px;
+  padding: 11px 17px;
+  border: 0;
+  border-radius: 11px;
+  background: #00ffcc;
+  font-weight: 800;
+  cursor: pointer;
+}
+.search-state--error {
+  color: #ff8398;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin-top: 36px;
+  button {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 204, 0.24);
+    background: #11141d;
+    color: #dce6f5;
+    cursor: pointer;
+  }
+  button.is-active {
+    background: #00ffcc;
+    color: #06100d;
+    border-color: #00ffcc;
+    font-weight: 900;
+  }
+  button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  &__dots {
+    color: #73839a;
+  }
+}
+
+@media (max-width: 1180px) {
+  .search-cars-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .search-layout {
     grid-template-columns: 1fr;
   }
+  .search-filters {
+    position: static;
+  }
 }
-
-@media (max-width: 768px) {
-  .search-page {
-    padding: 50px 15px;
+@media (max-width: 650px) {
+  .search-toolbar,
+  .results-summary {
+    flex-direction: column;
+  }
+  .search-toolbar > select {
+    width: 100%;
+  }
+  .search-cars-grid {
+    grid-template-columns: 1fr;
   }
 }
